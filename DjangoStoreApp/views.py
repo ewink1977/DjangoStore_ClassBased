@@ -5,3 +5,9 @@ class Home(View):
     def get(self, request):
         return render(request, 'html/home.html')
 
+class Products(View):
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        pass

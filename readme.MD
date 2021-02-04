@@ -1,0 +1,1 @@
+Classed base Django Store assignment. Simple assignment to learn how to use class based views rather than function based views.
