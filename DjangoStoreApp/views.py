@@ -30,3 +30,19 @@ class ProductView(View):
         }
         return render(request, 'html/product.html', context)
 
+class ProductUpdate(View):
+    def post(self, request):
+        updatedProduct = Product.objects.get(id = request.POST['prodID'])
+        updatedProduct.manufacturer = request.POST['prodmanu']
+        updatedProduct.name = request.POST['prodname']
+        updatedProduct.price = request.POST['prodprice']
+        updatedProduct.description = request.POST['proddesc']
+        updatedProduct.save()
+        productID = request.POST['prodID']
+        return redirect('product_info', productID)
+
+class ProductDelete(View):
+    def get(self, request, id):
+        deletingProduct = Product.objects.get(id = id)
+        deletingProduct.delete()
+        return redirect('products')

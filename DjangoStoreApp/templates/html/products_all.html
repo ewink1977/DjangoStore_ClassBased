@@ -63,7 +63,7 @@
                 <select class="form-control" id="prodmanu" name="prodmanu">
                     <option selected>Choose...</option>
                     {% for product_obj in products %}
-                    <option>{{ product_obj.manufacturer }}</option>
+                    <option value="{{ product_obj.manufacturer }}">{{ product_obj.manufacturer }}</option>
                     {% endfor %}
                 </select>
             </div>
