@@ -2,15 +2,26 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-8">
+        <div class="col-8 my-3">
             <h1>ewink's Store!</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-5">
+        <div class="col-5 my-2">
             <h3>All Products</h3>
         </div>
     </div>
+    {% if messages %}
+        <div class="row justify-content-center message-div">
+            <div class="col text-center">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    {% endif %}
     <div class="row">
         <div class="productTable col">
             <table class="table table-striped">
@@ -27,11 +38,11 @@
                     {% if products %}
                     {% for product_obj in products %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td><a href="">EDIT/DELETE</a></td>
+                        <th scope="row">{{ product_obj.manufacturer }}</th>
+                        <td>{{ product_obj.name }}</td>
+                        <td>{{ product_obj.price }}</td>
+                        <td>{{ product_obj.created_at }}</td>
+                        <td><a href="{% url 'product_info' product_obj.pk %}">EDIT/DELETE</a></td>
                     </tr>
                     {% endfor %}
                     {% endif %}
@@ -44,13 +55,16 @@
             <h3>Add Product</h3>
         </div>
     </div>
-    <form method="POST" action="">
+    <form method="POST" action="{% url 'products' %}">
         {% csrf_token %}
         <div class="col-6 my-1">
             <label for="prodmanu" class="col-form-label">Manufacturer (Existing)</label>
             <div class="col-sm-12">
                 <select class="form-control" id="prodmanu" name="prodmanu">
                     <option selected>Choose...</option>
+                    {% for product_obj in products %}
+                    <option>{{ product_obj.manufacturer }}</option>
+                    {% endfor %}
                 </select>
             </div>
         </div>

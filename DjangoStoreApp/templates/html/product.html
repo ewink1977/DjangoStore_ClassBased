@@ -1,7 +1,39 @@
 {% extends 'html/base.html' %}
 {% block content %}
-
-
+<div class="container p-5">
+    <h1>{{ product.name }}</h1>
+    <form method="POST" action="{% url 'products' %}">
+        {% csrf_token %}
+        <div class="col-6 my-1">
+            <label for="prodmanuNEW" class="col-form-label">Manufacturer</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="prodmanuNEW" name="prodmanu" value="{{ product.manufacturer }}">
+            </div>
+        </div>
+        <div class="col-6 my-1">
+            <label for="prodname" class="col-form-label">Product Name</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="prodname" name="prodname" value="{{ product.name }}">
+            </div>
+        </div>
+        <div class="col-6 my-1">
+            <label for="prodprice" class="col-form-label">Price ($)</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="prodprice" name="prodprice" value="{{ product.price }}">
+            </div>
+        </div>
+        <div class="col-6 my-1">
+            <label for="prodprice" class="col-form-label">Description</label>
+            <div class="col-sm-12">
+                <textarea class="form-control" id="proddesc" name="proddesc" rows="5">{{ product.description }}</textarea>
+            </div>
+        </div>
+        <div class="col-6 my-5 text-right">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href=""><button type="button" class="btn btn-danger">Delete</button></a>
+        </div>
+    </form>
+</div>
 
 
 {% endblock content %}
