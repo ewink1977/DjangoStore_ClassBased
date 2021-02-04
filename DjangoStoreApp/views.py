@@ -7,7 +7,7 @@ class Home(View):
 
 class Products(View):
     def get(self, request):
-        pass
+        return render(request, 'html/products_all.html')
 
     def post(self, request):
         pass
